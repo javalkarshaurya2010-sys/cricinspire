@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+export async function getStaticPaths() {
+  const lessons = (await getCollection('lessons')).sort((a, b) => a.data.order - b.data.order);
+  return lessons.map((entry, i) => ({ params: { id: entry.id }, props: { entry, next: lessons[i + 1] } }));
+}
+const { entry, next } = Astro.props;
+const { Content } = await render(entry);
+const quiz = entry.data.quiz;
+---
+<BaseLayout title={entry.data.title} description={entry.data.summary}>
+  <span class="inline-block rounded-full bg-[#5DCAA5] text-[#04342C] px-3 py-1 text-xs font-medium">Lesson {entry.data.order} · {entry.data.readMinutes} min</span>
+  <h1 class="mt-3 text-3xl font-medium">{entry.data.title}</h1>
+  <article class="mt-4 max-w-2xl space-y-3 text-sky leading-relaxed"><Content /></article>
+  {quiz && (
+    <section class="mt-6 max-w-2xl rounded-2xl bg-[#854F0B] p-4" id="quiz" data-answer={quiz.answer}>
+      <h2 class="font-medium">Quick check</h2>
+      <p class="text-sm mt-1">{quiz.question}</p>
+      <div class="mt-3 flex gap-2 flex-wrap">
+        {quiz.options.map((o, i) => <button type="button" data-i={i} class="opt rounded-full bg-[#FAEEDA] text-gold-ink px-4 py-1.5 text-sm">{o}</button>)}
+      </div>
+      <p id="result" class="mt-3 text-sm" aria-live="polite"></p>
+    </section>
+  )}
+  <div class="mt-6 flex justify-end">
+    {next ? <a href={`/learn/${next.id}`} class="rounded-full bg-gold text-gold-ink px-5 py-2.5 text-sm font-medium">Next lesson</a> : <a href="/teams" class="rounded-full bg-gold text-gold-ink px-5 py-2.5 text-sm font-medium">Find a team</a>}
+  </div>
+  <script>
+    const box = document.getElementById('quiz');
+    if (box) {
+      const answer = Number(box.dataset.answer);
+      box.querySelectorAll<HTMLButtonElement>('.opt').forEach((b) =>
+        b.addEventListener('click', () => {
+          const ok = Number(b.dataset.i) === answer;
+          document.getElementById('result')!.textContent = ok ? 'Correct. Nice work.' : 'Not quite. Try another.';
+        }));
+    }
+  </script>
+</BaseLayout>

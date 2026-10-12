@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Teen Reporter">
+  <h1 class="text-3xl font-medium">Be a Teen Reporter</h1>
+  <p class="mt-2 max-w-2xl text-sky">Write about a match, a player, or what cricket means to you. Every submission is reviewed by an adult editor before it is published.</p>
+  <form class="mt-6 max-w-xl grid gap-4" name="reporter" method="POST" action="#" data-todo="connect Formspree or Netlify Forms">
+    <label class="grid gap-1 text-sm">First name<input name="name" required class="rounded-lg bg-navy-card px-3 py-2" /></label>
+    <label class="grid gap-1 text-sm">Story title<input name="title" required class="rounded-lg bg-navy-card px-3 py-2" /></label>
+    <label class="grid gap-1 text-sm">Your story<textarea name="story" rows="6" required class="rounded-lg bg-navy-card px-3 py-2"></textarea></label>
+    <label class="grid gap-1 text-sm">Parent or guardian email<input type="email" name="parent_email" required class="rounded-lg bg-navy-card px-3 py-2" /></label>
+    <label class="flex gap-2 text-sm"><input type="checkbox" name="consent" required /> A parent or guardian agrees to this being published with my first name.</label>
+    <button class="rounded-full bg-gold text-gold-ink px-5 py-2.5 text-sm font-medium justify-self-start">Send for review</button>
+  </form>
+</BaseLayout>

@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+const lessons = (await getCollection('lessons')).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Cricket 101">
+  <h1 class="text-3xl font-medium">Cricket 101</h1>
+  <p class="mt-2 text-sky">Know baseball? You are already halfway there.</p>
+  <ol class="mt-6 grid gap-3">
+    {lessons.map((l) => (
+      <li><a href={`/learn/${l.id}`} class="block rounded-2xl bg-navy-card p-4 hover:bg-navy-line">
+        <span class="text-xs text-gold">Lesson {l.data.order} · {l.data.readMinutes} min</span>
+        <h2 class="font-medium">{l.data.title}</h2>
+        <p class="text-sm text-sky">{l.data.summary}</p>
+      </a></li>
+    ))}
+  </ol>
+</BaseLayout>

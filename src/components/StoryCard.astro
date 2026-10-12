@@ -1,0 +1,9 @@
+---
+const { slug, title, type, author, authorAge, state, sample } = Astro.props;
+const colors: Record<string, string> = { profile: 'bg-gold text-gold-ink', report: 'bg-[#5DCAA5] text-[#04342C]', explainer: 'bg-sky text-navy', quiz: 'bg-[#F0997B] text-[#4A1B0C]' };
+---
+<a href={`/stories/${slug}`} class="block rounded-2xl bg-navy-card p-4 hover:bg-navy-line transition-colors">
+  <span class={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${colors[type]}`}>{type}</span>
+  <h3 class="mt-2 font-medium">{title}</h3>
+  <p class="text-xs text-sky mt-1">{author}{authorAge ? `, ${authorAge}` : ''}{state ? ` · ${state}` : ''}{sample ? ' · sample' : ''}</p>
+</a>

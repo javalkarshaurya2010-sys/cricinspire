@@ -1,0 +1,11 @@
+---
+const { name, city, state, ageGroups, level, girls, sample } = Astro.props;
+const initials = name.split(' ').slice(0, 2).map((w: string) => w[0]).join('');
+---
+<div class="rounded-2xl bg-navy-card p-4 flex items-center gap-3">
+  <div class="size-11 rounded-full bg-red flex items-center justify-center font-medium shrink-0" aria-hidden="true">{initials}</div>
+  <div class="flex-1 min-w-0">
+    <h3 class="font-medium">{name}</h3>
+    <p class="text-xs text-sky">{city}, {state} · {ageGroups.join(', ')} · {level}{girls ? ' · girls' : ''}{sample ? ' · sample listing' : ''}</p>
+  </div>
+</div>

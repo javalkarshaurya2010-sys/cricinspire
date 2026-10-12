@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TeamCard from '../components/TeamCard.astro';
+import { getCollection } from 'astro:content';
+const teams = await getCollection('teams');
+const filters = [['all', 'All'], ['U13', 'Under 13'], ['U16', 'Under 16'], ['U19', 'Under 19'], ['girls', 'Girls'], ['beginner', 'Beginner']];
+---
+<BaseLayout title="Find a team">
+  <h1 class="text-3xl font-medium">Find your squad</h1>
+  <p class="mt-2 text-sky">No experience needed. Most teams start beginners.</p>
+  <div class="mt-4 flex flex-wrap gap-2" role="group" aria-label="Filter teams">
+    {filters.map(([k, label]) => (
+      <button type="button" data-f={k} class="f rounded-full px-3 py-1 text-xs bg-navy-line aria-pressed:bg-gold aria-pressed:text-gold-ink" aria-pressed={k === 'all'}>{label}</button>
+    ))}
+  </div>
+  <div class="mt-4 grid gap-3" id="list">
+    {teams.map((t) => (
+      <div data-age={t.data.ageGroups.join(' ')} data-level={t.data.level} data-girls={String(t.data.girls)}>
+        <TeamCard {...t.data} />
+      </div>
+    ))}
+  </div>
+  <p class="mt-4 text-xs text-sky">Listings marked sample are placeholders. Real teams are verified before they appear.</p>
+  <script>
+    const btns = document.querySelectorAll<HTMLButtonElement>('.f');
+    const items = document.querySelectorAll<HTMLElement>('#list > div');
+    btns.forEach((b) => b.addEventListener('click', () => {
+      const k = b.dataset.f!;
+      btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      items.forEach((el) => {
+        const show = k === 'all' || (k === 'girls' ? el.dataset.girls === 'true' : k === 'beginner' ? el.dataset.level === 'beginner' : el.dataset.age!.split(' ').includes(k));
+        el.hidden = !show;
+      });
+    }));
+  </script>
+</BaseLayout>

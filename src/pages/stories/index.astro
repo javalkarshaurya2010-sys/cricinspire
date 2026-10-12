@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StoryCard from '../../components/StoryCard.astro';
+import { getCollection } from 'astro:content';
+const stories = (await getCollection('stories', (s) => !s.data.draft)).sort((a, b) => +b.data.date - +a.data.date);
+---
+<BaseLayout title="Stories">
+  <h1 class="text-3xl font-medium">Stories</h1>
+  <p class="mt-2 text-sky">Profiles, match reports, and explainers from players your age.</p>
+  <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+    {stories.map((s) => <StoryCard slug={s.id} {...s.data} />)}
+  </div>
+</BaseLayout>

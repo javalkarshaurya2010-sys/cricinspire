@@ -1,0 +1,15 @@
+---
+const { current } = Astro.props;
+const links = [
+  ['Home', '/'], ['Learn', '/learn'], ['Stories', '/stories'], ['Teams', '/teams'], ['LA28', '/la28'], ['Reporter', '/reporter'],
+];
+const active = (href: string) => href === '/' ? current === '/' : current.startsWith(href);
+---
+<header class="border-b border-navy-line">
+  <nav class="mx-auto max-w-5xl px-4 py-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-sky" aria-label="Main">
+    <a href="/" class="mr-auto text-lg font-medium text-white">Cric<span class="text-gold">Inspire</span></a>
+    {links.map(([label, href]) => (
+      <a href={href} class={active(href) ? 'text-white border-b-2 border-gold pb-0.5' : 'hover:text-white'}>{label}</a>
+    ))}
+  </nav>
+</header>
