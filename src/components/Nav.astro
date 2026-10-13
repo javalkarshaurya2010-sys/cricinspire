@@ -1,7 +1,7 @@
 ---
 const { current } = Astro.props;
 const links = [
-  ['Home', '/'], ['Learn', '/learn'], ['Stories', '/stories'], ['Teams', '/teams'], ['LA28', '/la28'], ['Reporter', '/reporter'],
+  ['Home', '/'], ['Learn', '/learn'], ['Stories', '/stories'], ['Teams', '/teams'], ['LA28', '/la28'], ['Reporter', '/reporter'], ['About', '/about'],
 ];
 const active = (href: string) => href === '/' ? current === '/' : current.startsWith(href);
 ---
