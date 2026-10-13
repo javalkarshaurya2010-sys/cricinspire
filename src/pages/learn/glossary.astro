@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { glossary } from '../../data/glossary';
+const terms = [...glossary].sort((a, b) => a.term.localeCompare(b.term));
+---
+<BaseLayout title="Cricket glossary" description="Plain-English meanings for cricket words.">
+  <h1 class="text-3xl font-medium">Cricket glossary</h1>
+  <p class="mt-2 text-sky">Type a word, like yorker or powerplay.</p>
+  <label class="mt-4 grid gap-1 text-sm max-w-md">Search words
+    <input id="q" type="search" placeholder="Try wicket" class="rounded-lg bg-navy-card px-3 py-2" />
+  </label>
+  <p id="none" class="mt-4 text-sm text-sky" hidden>No match. Try another word.</p>
+  <dl id="terms" class="mt-4 grid gap-3 sm:grid-cols-2">
+    {terms.map((t) => (
+      <div class="term rounded-2xl bg-navy-card p-4" data-t={`${t.term} ${t.meaning}`.toLowerCase()}>
+        <dt class="font-medium text-gold">{t.term}</dt>
+        <dd class="text-sm text-sky mt-1">{t.meaning}</dd>
+      </div>
+    ))}
+  </dl>
+  <script>
+    const q = document.getElementById('q') as HTMLInputElement;
+    const items = document.querySelectorAll<HTMLElement>('.term');
+    const none = document.getElementById('none')!;
+    q.addEventListener('input', () => {
+      const v = q.value.trim().toLowerCase();
+      let shown = 0;
+      items.forEach((el) => { const ok = !v || el.dataset.t!.includes(v); el.hidden = !ok; if (ok) shown++; });
+      none.hidden = shown > 0;
+    });
+  </script>
+</BaseLayout>

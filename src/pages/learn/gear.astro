@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const items = [
+  ['Bat', 'Willow wood. Choose a size that matches your height.', 'Start here, or borrow from your club'],
+  ['Ball', 'Leather for matches. Softer balls are common for beginners.', 'Ask your coach which type to use'],
+  ['Helmet', 'Required when facing a hard ball.', 'Do not skip this one'],
+  ['Pads and gloves', 'Protect the lower legs and hands when batting.', 'Many clubs lend sets'],
+  ['Protective guard', 'Worn under clothes by batters.', 'Essential for batters'],
+  ['Shoes', 'Sneakers or cleats with good grip.', 'Any sports shoes work to start'],
+];
+---
+<BaseLayout title="Gear guide" description="What you need to start playing cricket.">
+  <h1 class="text-3xl font-medium">Gear guide</h1>
+  <p class="mt-2 max-w-2xl text-sky">You do not need to buy everything. Ask your club or school first, since many lend equipment to beginners. Prices vary a lot, so check with your coach before you buy.</p>
+  <div class="mt-6 grid gap-3 sm:grid-cols-2">
+    {items.map(([n, d, tip]) => (
+      <div class="rounded-2xl bg-navy-card p-4"><p class="font-medium">{n}</p><p class="text-sm text-sky mt-1">{d}</p><p class="text-xs text-gold mt-2">{tip}</p></div>
+    ))}
+  </div>
+  <h2 class="mt-8 text-lg font-medium">For parents and coaches</h2>
+  <ul class="mt-2 max-w-2xl list-disc pl-5 space-y-1 text-sky">
+    <li>Always use a helmet for batters when a hard ball is in play.</li>
+    <li>Younger players can start with soft or tennis balls.</li>
+    <li>Ask the club about loan gear before buying new.</li>
+  </ul>
+</BaseLayout>

@@ -1,14 +1,25 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Countdown from '../components/Countdown.astro';
+const timeline = [
+  ['Now', 'Teams and governing bodies prepare. USA Cricket is working through organizational changes, so details may shift.'],
+  ['2027', 'Pan American Games in Lima are part of the road for US teams.'],
+  ['Jul 14-30, 2028', 'Olympic Games in Los Angeles. Cricket is played in Pomona.'],
+];
 ---
 <BaseLayout title="Road to LA28">
   <h1 class="text-3xl font-medium">Road to LA28</h1>
   <p class="mt-2 max-w-2xl text-sky">Cricket returns to the Olympics in 2028, last seen at the Games in 1900.</p>
+  <p class="mt-4 text-3xl font-medium text-gold"><Countdown /></p>
   <div class="mt-6 grid gap-3 sm:grid-cols-3">
     <div class="rounded-2xl bg-blue p-4"><p class="text-xl font-medium">T20</p><p class="text-sm opacity-85">Six teams per gender</p></div>
     <div class="rounded-2xl bg-green p-4"><p class="text-xl font-medium">Pomona, CA</p><p class="text-sm opacity-85">Venue</p></div>
     <div class="rounded-2xl bg-coral p-4"><p class="text-xl font-medium">Jul 14-30, 2028</p><p class="text-sm opacity-85">Games dates</p></div>
   </div>
+  <h2 class="mt-8 text-lg font-medium">The road</h2>
+  <ol class="mt-3 grid gap-3">
+    {timeline.map(([w, d]) => <li class="rounded-2xl bg-navy-card p-4"><p class="font-medium text-gold">{w}</p><p class="text-sm text-sky">{d}</p></li>)}
+  </ol>
   <h2 class="mt-8 text-lg font-medium">Can I play for Team USA?</h2>
-  <p class="mt-2 max-w-2xl text-sky">Olympic teams require US citizenship. International cricket under the ICC uses residency rules instead (three years). The USA Cricket youth pathway is still being built, so check usacricket.org for the latest.</p>
+  <p class="mt-2 max-w-2xl text-sky">Olympic teams require US citizenship. International cricket under the ICC uses residency rules instead (three years). The USA Cricket youth pathway is still being built, so check usacricket.org for the latest. Keep learning and playing, because every future player starts at the beginning.</p>
 </BaseLayout>

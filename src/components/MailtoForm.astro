@@ -1,0 +1,20 @@
+---
+interface Props { subject: string; id: string; button?: string }
+const { subject, id, button = 'Send for review' } = Astro.props;
+---
+<form id={id} class="mt-6 max-w-xl grid gap-4" data-subject={subject} data-to="javalkar.shaurya2010@gmail.com">
+  <slot />
+  <button type="submit" class="rounded-full bg-gold text-gold-ink px-5 py-2.5 text-sm font-medium justify-self-start">{button}</button>
+  <p class="text-xs text-sky">This opens your email app with the message ready to send. An adult editor reviews everything before anything is published.</p>
+</form>
+<script>
+  document.querySelectorAll<HTMLFormElement>('form[data-subject]').forEach((f) => {
+    f.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const lines: string[] = [];
+      new FormData(f).forEach((v, k) => lines.push(`${k}: ${v}`));
+      const href = `mailto:${f.dataset.to}?subject=${encodeURIComponent(f.dataset.subject!)}&body=${encodeURIComponent(lines.join('\n\n'))}`;
+      window.location.href = href;
+    });
+  });
+</script>

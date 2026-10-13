@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const rows = [
+  ['Players per side', '9 on the field', '11 on the field'],
+  ['Thrower', 'Pitcher throws from a mound', 'Bowler runs in and bowls with a straight arm'],
+  ['Where you can hit', 'Inside the foul lines', 'Any direction, 360 degrees'],
+  ['Ball bounces?', 'Rarely', 'Usually once before the batter'],
+  ['Scoring', 'Runs by touching four bases', 'Runs by running between two ends, plus 4s and 6s'],
+  ['Out', 'Three strikes, force outs, fly balls', 'Bowled, caught, LBW, run out, stumped'],
+  ['Turn', 'Three outs per half-inning', 'Ten wickets or the overs run out'],
+  ['Game length', 'About three hours', 'T20 about three hours, Tests up to five days'],
+];
+---
+<BaseLayout title="Cricket vs baseball" description="Cricket explained for baseball and softball fans.">
+  <h1 class="text-3xl font-medium">Cricket vs baseball</h1>
+  <p class="mt-2 max-w-2xl text-sky">If you know baseball or softball, a lot of cricket will feel familiar. Here is what lines up and what does not.</p>
+  <div class="mt-6 overflow-x-auto rounded-2xl bg-navy-card">
+    <table class="w-full text-sm min-w-[520px]">
+      <thead><tr class="text-left text-gold"><th class="p-3"></th><th class="p-3">Baseball</th><th class="p-3">Cricket</th></tr></thead>
+      <tbody>
+        {rows.map(([a, b, c]) => <tr class="border-t border-navy-line"><th class="p-3 text-left font-medium">{a}</th><td class="p-3 text-sky">{b}</td><td class="p-3 text-sky">{c}</td></tr>)}
+      </tbody>
+    </table>
+  </div>
+  <p class="mt-4 text-sm text-sky">Ready to go deeper? <a class="underline text-gold" href="/learn/01-the-basics">Start with lesson 1</a>.</p>
+</BaseLayout>

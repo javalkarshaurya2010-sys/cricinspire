@@ -1,6 +1,18 @@
+---
+const cols = [
+  ['Learn', [['Cricket 101', '/learn'], ['Cricket vs baseball', '/learn/vs-baseball'], ['Glossary', '/learn/glossary'], ['Gear guide', '/learn/gear'], ['Drills', '/learn/drills']]],
+  ['Play', [['Find a team', '/teams'], ['Events', '/events'], ['Quizzes', '/quiz'], ['Where to watch', '/watch']]],
+  ['CricInspire', [['My journey', '/journey'], ['Teen Reporter', '/reporter'], ['About and safety', '/about'], ['Search', '/search']]],
+];
+---
 <footer class="border-t border-navy-line mt-10">
-  <div class="mx-auto max-w-5xl px-4 py-6 text-xs text-sky flex flex-wrap gap-4 justify-between">
-    <p>CricInspire. Your cricket journey starts here.</p>
-    <p><a class="underline" href="/about">About and safety</a></p>
+  <div class="mx-auto max-w-5xl px-4 py-8 grid gap-6 sm:grid-cols-3 text-sm text-sky">
+    {cols.map(([title, items]) => (
+      <div>
+        <p class="font-medium text-white mb-2">{title}</p>
+        <ul class="space-y-1">{(items as string[][]).map(([label, href]) => <li><a class="hover:text-white" href={href}>{label}</a></li>)}</ul>
+      </div>
+    ))}
   </div>
+  <div class="mx-auto max-w-5xl px-4 pb-6 text-xs text-sky">CricInspire. Your cricket journey starts here. Not affiliated with USA Cricket, the ICC, or any league.</div>
 </footer>

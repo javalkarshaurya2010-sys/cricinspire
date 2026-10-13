@@ -41,8 +41,14 @@ public/           images, favicon, og images
 - Mobile-first. WCAG AA contrast, keyboard navigable, alt text on all images.
 - Keep light-theme support in mind; use CSS variables/Tailwind tokens, not hardcoded colors in components.
 
-## Pages (v1)
-Home, Cricket 101 (lessons with quick-check quiz), Stories, Find a Team (filter by age, level, girls, zip/state), Road to LA28, Teen Reporter (submit form), About/Safety.
+## Pages
+Home, Cricket 101 (8 lessons, progress badges in localStorage), Glossary (searchable), Cricket vs baseball, Gear, Drills, Quizzes, Stories, Find a Team, Where to watch, Events, Road to LA28 (countdown), Teen Reporter, My journey, About/Safety, Search (Pagefind, built by `npm run build`).
+
+## Forms
+Reporter, team and event forms use `MailtoForm.astro`: they open the user's email app addressed to the founder. No server, no data stored. Swap for Formspree or Netlify Forms when a real inbox/moderation flow exists.
+
+## Not done yet (needs real input)
+Real photos, custom domain, real verified teams, player profiles (need consent), newsletter, analytics, light theme, OG share image, `site` URL in `astro.config.mjs`.
 
 ## Rules for safety and legal (non-negotiable)
 - All teen submissions are moderated before publishing. Nothing auto-publishes.

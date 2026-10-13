@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const steps = [
+  ['2025', 'Nationals', 'Played at Nationals for the Dallas B team.', 'bg-blue'],
+  ['2026', 'CricInspire launches', 'Started this site to help teens discover cricket.', 'bg-green'],
+  ['2028', 'LA28', 'Cricket returns to the Olympics in Pomona, California.', 'bg-coral'],
+];
+---
+<BaseLayout title="My journey" description="Shaurya's cricket journey and why CricInspire exists.">
+  <h1 class="text-3xl font-medium">My journey</h1>
+  <p class="mt-2 max-w-2xl text-sky">A few milestones so far. More to come as the story grows.</p>
+  <ol class="mt-6 grid gap-3">
+    {steps.map(([y, t, d, c]) => (
+      <li class={`rounded-2xl ${c} p-4 flex gap-4 items-start`}>
+        <span class="text-2xl font-medium w-16 shrink-0">{y}</span>
+        <div><p class="font-medium">{t}</p><p class="text-sm opacity-90">{d}</p></div>
+      </li>
+    ))}
+  </ol>
+  <p class="mt-6 text-sm text-sky">Read the full story on the <a class="underline text-gold" href="/about">About page</a>.</p>
+</BaseLayout>

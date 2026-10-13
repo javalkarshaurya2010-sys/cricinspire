@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import StoryCard from '../components/StoryCard.astro';
+import Countdown from '../components/Countdown.astro';
 import { getCollection } from 'astro:content';
 const stories = (await getCollection('stories', (s) => !s.data.draft)).slice(0, 3);
 ---
@@ -21,7 +22,7 @@ const stories = (await getCollection('stories', (s) => !s.data.draft)).slice(0, 
   <section class="grid gap-3 sm:grid-cols-3 my-6">
     <div class="rounded-2xl bg-blue p-4"><p class="text-2xl font-medium">T20</p><p class="text-sm opacity-85">One match, about 3 hours</p></div>
     <div class="rounded-2xl bg-green p-4"><p class="text-2xl font-medium">Pomona, CA</p><p class="text-sm opacity-85">LA28 cricket venue</p></div>
-    <div class="rounded-2xl bg-coral p-4"><p class="text-2xl font-medium">Jul 14-30, 2028</p><p class="text-sm opacity-85">Olympic Games</p></div>
+    <div class="rounded-2xl bg-coral p-4"><p class="text-2xl font-medium">Jul 14-30, 2028</p><p class="text-sm opacity-85">Olympic Games · <Countdown /></p></div>
   </section>
   <section>
     <h2 class="text-lg font-medium mb-3">Fresh from the community</h2>

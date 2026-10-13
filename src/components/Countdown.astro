@@ -1,0 +1,10 @@
+---
+interface Props { class?: string }
+---
+<span class:list={['countdown', Astro.props.class]} data-target="2028-07-14T00:00:00-07:00">LA28</span>
+<script>
+  document.querySelectorAll<HTMLElement>('.countdown').forEach((el) => {
+    const days = Math.ceil((new Date(el.dataset.target!).getTime() - Date.now()) / 86400000);
+    el.textContent = days > 0 ? `${days.toLocaleString('en-US')} days to go` : 'The Games are here';
+  });
+</script>

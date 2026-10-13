@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MailtoForm from '../components/MailtoForm.astro';
+import Countdown from '../components/Countdown.astro';
+---
+<BaseLayout title="Events" description="Cricket events for teens in the US.">
+  <h1 class="text-3xl font-medium">Events</h1>
+  <p class="mt-2 max-w-2xl text-sky">Learn-to-play days, youth tournaments, and watch parties. Real local events are added once they are confirmed.</p>
+
+  <div class="mt-6 rounded-2xl bg-coral p-4">
+    <p class="text-xs">The big one</p>
+    <p class="text-xl font-medium">LA28 Olympic cricket</p>
+    <p class="text-sm opacity-90">July 14-30, 2028 · Pomona, California · <Countdown /></p>
+  </div>
+
+  <p class="mt-6 text-sm text-sky">No local events listed yet. Know one? Send it in and an editor will check it.</p>
+  <MailtoForm id="event-form" subject="CricInspire event submission" button="Send event">
+    <label class="grid gap-1 text-sm">Event name<input name="event" required class="rounded-lg bg-navy-card px-3 py-2" /></label>
+    <label class="grid gap-1 text-sm">Date and city<input name="when_where" required class="rounded-lg bg-navy-card px-3 py-2" /></label>
+    <label class="grid gap-1 text-sm">Link or contact for details<input name="link" required class="rounded-lg bg-navy-card px-3 py-2" /></label>
+  </MailtoForm>
+</BaseLayout>

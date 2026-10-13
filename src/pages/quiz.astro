@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const role = [
+  { q: 'What sounds most fun?', o: [['Hitting big shots', 'bat'], ['Being the fastest one on the field', 'bowl'], ['Making a diving catch', 'field'], ['Being in every play', 'keep']] },
+  { q: 'Pick a superpower.', o: [['Super strength', 'bat'], ['Super speed', 'bowl'], ['Super reflexes', 'keep'], ['Super aim', 'field']] },
+  { q: 'In a team project you are the...', o: [['Finisher', 'bat'], ['Starter', 'bowl'], ['Organizer', 'keep'], ['Helper who is everywhere', 'field']] },
+];
+const results = {
+  bat: ['Batter', 'You like the spotlight and big moments. Start with lesson 3: scoring runs.', '/learn/03-scoring-runs'],
+  bowl: ['Bowler', 'Speed, spin, and plans. Try the stump target drill.', '/learn/drills'],
+  field: ['Fielder', 'Quick hands and sharp throws. Check out fielding positions.', '/learn/05-fielding-positions'],
+  keep: ['Wicketkeeper', 'Always in the game, calling the shots. Read about fielding.', '/learn/05-fielding-positions'],
+};
+const trivia = [
+  { q: 'How many balls are in an over?', o: ['4', '6', '8'], a: 1 },
+  { q: 'What does 6 runs mean?', o: ['The ball crossed the rope on the full', 'Six batters are out', 'The over is finished'], a: 0 },
+  { q: 'Which format is coming to the Olympics?', o: ['Test', 'ODI', 'T20'], a: 2 },
+  { q: 'How many wickets end an innings?', o: ['5', '10', '11'], a: 1 },
+  { q: 'Who stands behind the stumps?', o: ['The umpire', 'The wicketkeeper', 'The captain'], a: 1 },
+];
+---
+<BaseLayout title="Quizzes" description="Which cricket role are you? Test your cricket knowledge.">
+  <h1 class="text-3xl font-medium">Quizzes</h1>
+
+  <section class="mt-6 rounded-2xl bg-navy-card p-5" id="role" data-results={JSON.stringify(results)}>
+    <span class="inline-block rounded-full bg-[#F0997B] text-[#4A1B0C] px-3 py-1 text-xs font-medium">2 min</span>
+    <h2 class="mt-2 text-xl font-medium">Which cricket role are you?</h2>
+    <div class="mt-4 grid gap-5">
+      {role.map((r, i) => (
+        <fieldset>
+          <legend class="text-sm font-medium">{r.q}</legend>
+          <div class="mt-2 flex flex-wrap gap-2">
+            {r.o.map(([label, val]) => (
+              <label class="cursor-pointer"><input type="radio" class="peer sr-only" name={`r${i}`} value={val} /><span class="inline-block rounded-full bg-navy-line px-3 py-1.5 text-sm peer-checked:bg-gold peer-checked:text-gold-ink peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-gold">{label}</span></label>
+            ))}
+          </div>
+        </fieldset>
+      ))}
+    </div>
+    <button id="role-go" type="button" class="mt-5 rounded-full bg-gold text-gold-ink px-5 py-2.5 text-sm font-medium">See my role</button>
+    <p id="role-err" class="mt-2 text-sm text-gold" hidden>Answer all three questions first.</p>
+    <div id="role-out" class="mt-4 rounded-2xl bg-navy p-4" hidden aria-live="polite"></div>
+  </section>
+
+  <section class="mt-6 rounded-2xl bg-navy-card p-5" id="trivia" data-answers={JSON.stringify(trivia.map((t) => t.a))}>
+    <span class="inline-block rounded-full bg-gold text-gold-ink px-3 py-1 text-xs font-medium">5 questions</span>
+    <h2 class="mt-2 text-xl font-medium">Test your cricket knowledge</h2>
+    <div class="mt-4 grid gap-5">
+      {trivia.map((t, i) => (
+        <fieldset>
+          <legend class="text-sm font-medium">{i + 1}. {t.q}</legend>
+          <div class="mt-2 flex flex-wrap gap-2">
+            {t.o.map((label, j) => (
+              <label class="cursor-pointer"><input type="radio" class="peer sr-only" name={`t${i}`} value={j} /><span class="inline-block rounded-full bg-navy-line px-3 py-1.5 text-sm peer-checked:bg-gold peer-checked:text-gold-ink peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-gold">{label}</span></label>
+            ))}
+          </div>
+        </fieldset>
+      ))}
+    </div>
+    <button id="trivia-go" type="button" class="mt-5 rounded-full bg-gold text-gold-ink px-5 py-2.5 text-sm font-medium">Check my answers</button>
+    <p id="trivia-out" class="mt-3 text-sm" aria-live="polite"></p>
+  </section>
+
+  <script>
+    const val = (name: string) => (document.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)?.value ?? null);
+
+    document.getElementById('role-go')!.addEventListener('click', () => {
+      const picks = [0, 1, 2].map((i) => val(`r${i}`));
+      const err = document.getElementById('role-err')!;
+      const out = document.getElementById('role-out')!;
+      if (picks.some((p) => !p)) { err.hidden = false; out.hidden = true; return; }
+      err.hidden = true;
+      const count: Record<string, number> = {};
+      picks.forEach((p) => { count[p!] = (count[p!] || 0) + 1; });
+      const top = Object.entries(count).sort((a, b) => b[1] - a[1])[0][0];
+      const results = JSON.parse(document.getElementById('role')!.dataset.results!);
+      const [name, blurb, href] = results[top];
+      out.innerHTML = '';
+      const h = document.createElement('p'); h.className = 'text-lg font-medium'; h.textContent = `You are a ${name}`;
+      const p = document.createElement('p'); p.className = 'text-sm text-sky mt-1'; p.textContent = blurb;
+      const a = document.createElement('a'); a.href = href; a.className = 'mt-3 inline-block rounded-full bg-gold text-gold-ink px-4 py-2 text-xs font-medium'; a.textContent = 'Learn more';
+      out.append(h, p, a);
+      out.hidden = false;
+    });
+
+    document.getElementById('trivia-go')!.addEventListener('click', () => {
+      const answers: number[] = JSON.parse(document.getElementById('trivia')!.dataset.answers!);
+      const picks = answers.map((_, i) => val(`t${i}`));
+      const out = document.getElementById('trivia-out')!;
+      if (picks.some((p) => p === null)) { out.textContent = 'Answer all five questions first.'; return; }
+      const score = picks.filter((p, i) => Number(p) === answers[i]).length;
+      out.textContent = `You scored ${score} out of ${answers.length}. ${score === answers.length ? 'Perfect. You are ready for a match.' : 'Nice try. Review the lessons and go again.'}`;
+    });
+  </script>
+</BaseLayout>

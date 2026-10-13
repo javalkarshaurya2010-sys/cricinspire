@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+const drills = [
+  ['Wall catching', 'Throw a tennis ball against a wall and catch it with both hands. Step back as you improve. 5 minutes.', 'Fielding'],
+  ['Stump target', 'Set up a cone or bucket as a target and bowl 20 balls at it with a straight arm. Count your hits.', 'Bowling'],
+  ['Shadow batting', 'Without a ball, practice your stance and a straight drive in front of a mirror. Keep your head still.', 'Batting'],
+  ['Run between the lines', 'Place two markers about 20 meters apart. Sprint back and forth for 30 seconds, touching each marker.', 'Fitness'],
+  ['Reaction catches', 'A partner drops a ball from shoulder height and you catch it after one bounce.', 'Fielding'],
+];
+---
+<BaseLayout title="Backyard drills" description="Simple cricket drills you can do at home.">
+  <h1 class="text-3xl font-medium">Backyard drills</h1>
+  <p class="mt-2 max-w-2xl text-sky">Short practices you can do with a tennis ball and a bit of space. Warm up first, and ask a coach or parent before trying anything new. Use soft balls when practicing without protective gear.</p>
+  <div class="mt-6 grid gap-3">
+    {drills.map(([n, d, tag]) => (
+      <div class="rounded-2xl bg-navy-card p-4">
+        <span class="inline-block rounded-full bg-[#5DCAA5] text-[#04342C] px-2.5 py-0.5 text-xs font-medium">{tag}</span>
+        <p class="font-medium mt-2">{n}</p><p class="text-sm text-sky mt-1">{d}</p>
+      </div>
+    ))}
+  </div>
+</BaseLayout>

@@ -1,15 +1,19 @@
 ---
 const { current } = Astro.props;
 const links = [
-  ['Home', '/'], ['Learn', '/learn'], ['Stories', '/stories'], ['Teams', '/teams'], ['LA28', '/la28'], ['Reporter', '/reporter'], ['About', '/about'],
+  ['Learn', '/learn'], ['Quiz', '/quiz'], ['Stories', '/stories'], ['Teams', '/teams'], ['Watch', '/watch'], ['LA28', '/la28'], ['About', '/about'],
 ];
-const active = (href: string) => href === '/' ? current === '/' : current.startsWith(href);
+const active = (href: string) => current.startsWith(href);
 ---
 <header class="border-b border-navy-line">
   <nav class="mx-auto max-w-5xl px-4 py-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-sky" aria-label="Main">
-    <a href="/" class="mr-auto text-lg font-medium text-white">Cric<span class="text-gold">Inspire</span></a>
+    <a href="/" class="mr-auto flex items-center gap-2 text-lg font-medium text-white">
+      <img src="/logo.svg" alt="" width="28" height="28" class="rounded-lg" />
+      <span>Cric<span class="text-gold">Inspire</span></span>
+    </a>
     {links.map(([label, href]) => (
       <a href={href} class={active(href) ? 'text-white border-b-2 border-gold pb-0.5' : 'hover:text-white'}>{label}</a>
     ))}
+    <a href="/search" aria-label="Search" class="hover:text-white">Search</a>
   </nav>
 </header>

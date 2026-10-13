@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Search" description="Search lessons, stories, and teams.">
+  <h1 class="text-3xl font-medium">Search</h1>
+  <div id="search" class="mt-4 pagefind-theme"></div>
+  <p id="search-msg" class="mt-4 text-sm text-sky" hidden>Search is built when the site is built. Run npm run build and npm run preview to try it locally.</p>
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <script is:inline src="/pagefind/pagefind-ui.js" onerror="document.getElementById('search-msg').hidden=false"></script>
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', function () {
+      if (window.PagefindUI) new PagefindUI({ element: '#search', showSubResults: true });
+    });
+  </script>
+  <style is:global>
+    #search { --pagefind-ui-primary: #fac775; --pagefind-ui-text: #ffffff; --pagefind-ui-background: #1b3358; --pagefind-ui-border: #2b4a78; --pagefind-ui-tag: #2b4a78; }
+  </style>
+</BaseLayout>

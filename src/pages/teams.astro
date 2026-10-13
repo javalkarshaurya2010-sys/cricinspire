@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import TeamCard from '../components/TeamCard.astro';
+import MailtoForm from '../components/MailtoForm.astro';
 import { getCollection } from 'astro:content';
 const teams = await getCollection('teams');
 const filters = [['all', 'All'], ['U13', 'Under 13'], ['U16', 'Under 16'], ['U19', 'Under 19'], ['girls', 'Girls'], ['beginner', 'Beginner']];
@@ -21,6 +22,14 @@ const filters = [['all', 'All'], ['U13', 'Under 13'], ['U16', 'Under 16'], ['U19
     ))}
   </div>
   <p class="mt-4 text-xs text-sky">Listings marked sample are placeholders. Real teams are verified before they appear.</p>
+  <h2 class="mt-8 text-lg font-medium">Run a team or club?</h2>
+  <p class="mt-1 max-w-xl text-sm text-sky">Send us your details. We check every listing before it goes live.</p>
+  <MailtoForm id="team-form" subject="CricInspire team listing" button="Send team details">
+    <label class="grid gap-1 text-sm">Team or club name<input name="team" required class="rounded-lg bg-navy-card px-3 py-2" /></label>
+    <label class="grid gap-1 text-sm">City and state<input name="location" required class="rounded-lg bg-navy-card px-3 py-2" /></label>
+    <label class="grid gap-1 text-sm">Age groups and level<input name="ages_level" required class="rounded-lg bg-navy-card px-3 py-2" /></label>
+    <label class="grid gap-1 text-sm">Website or contact for families<input name="contact" required class="rounded-lg bg-navy-card px-3 py-2" /></label>
+  </MailtoForm>
   <script>
     const btns = document.querySelectorAll<HTMLButtonElement>('.f');
     const items = document.querySelectorAll<HTMLElement>('#list > div');

@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const items = [
+  ['Major League Cricket', 'The top T20 league in the US, played in the summer. In the US it has been shown on Willow, so check the official site for the current broadcast and streaming options.', 'https://www.majorleaguecricket.com'],
+  ['Minor League Cricket', 'The US development league. Matches are streamed on its digital channels, and the league runs a pathway for younger players.', 'https://minorleaguecricket.com'],
+  ['USA Cricket', 'The national governing body. It lists ways to get involved and updates on the national teams. The organization is going through changes, so check for the latest.', 'https://usacricket.org'],
+  ['ICC', 'The international body that runs World Cups and publishes official news, including the LA28 Olympic cricket plans.', 'https://www.icc-cricket.com'],
+];
+---
+<BaseLayout title="Where to watch" description="Official places to follow cricket in the US.">
+  <h1 class="text-3xl font-medium">Where to watch</h1>
+  <p class="mt-2 max-w-2xl text-sky">We link to the official sources. We never re-host match videos or copyrighted photos. Schedules and broadcasters change, so always check the official site.</p>
+  <div class="mt-6 grid gap-3 sm:grid-cols-2">
+    {items.map(([n, d, url]) => (
+      <a href={url} rel="noopener" target="_blank" class="rounded-2xl bg-navy-card p-4 hover:bg-navy-line block">
+        <p class="font-medium">{n}</p><p class="text-sm text-sky mt-1">{d}</p><p class="text-xs text-gold mt-2">Visit official site</p>
+      </a>
+    ))}
+  </div>
+  <h2 class="mt-8 text-lg font-medium">Tip for first-time viewers</h2>
+  <p class="mt-2 max-w-2xl text-sky">Start with a T20 match. Read <a class="underline text-gold" href="/learn">Cricket 101</a> first and keep the <a class="underline text-gold" href="/learn/glossary">glossary</a> open on your phone.</p>
+</BaseLayout>
