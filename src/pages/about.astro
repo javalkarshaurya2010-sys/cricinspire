@@ -1,11 +1,40 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+const email = 'javalkar.shaurya2010@gmail.com';
 ---
 <BaseLayout title="About and safety">
-  <h1 class="text-3xl font-medium">About and safety</h1>
-  <div class="mt-4 max-w-2xl space-y-3 text-sky">
-    <p>CricInspire helps US teens discover cricket, learn the game, and find a team.</p>
-    <p>Every teen submission is reviewed by an adult before publishing. A parent or guardian must consent before a teen name or photo appears.</p>
-    <p>We do not collect personal data from children under 13 and we do not run ads or trackers aimed at minors.</p>
-  </div>
+  <section>
+    <span class="inline-block rounded-full bg-red px-3 py-1 text-xs font-medium">Our story</span>
+    <h1 class="mt-3 text-3xl font-medium">Why I started CricInspire</h1>
+    <div class="mt-4 max-w-xl space-y-3 text-sky leading-relaxed">
+      <p>Hi, I'm Shaurya. I'm a student in Dallas, and cricket is a big part of my life.</p>
+      <p>In 2025 I played at Nationals for the Dallas B team. Standing on that field, I realized how many kids in America would love this game if anyone showed them how to start.</p>
+      <p>When I looked for cricket news, lessons, or a team made for teens, I found very little. Most of it is for adults, and the youth pathway is still being built.</p>
+      <p>With cricket coming to the Olympics in Los Angeles in 2028, I want any kid in America to learn the game in 10 minutes, read stories from players their own age, and find a squad to join.</p>
+      <p>CricInspire is my way of spreading the word. If you love cricket, or want to try it, you belong here.</p>
+    </div>
+    <div class="mt-4 flex flex-wrap gap-2">
+      <span class="rounded-full bg-blue px-3 py-1 text-xs font-medium">Nationals 2025</span>
+      <span class="rounded-full bg-green px-3 py-1 text-xs font-medium">Dallas B team</span>
+      <span class="rounded-full bg-coral px-3 py-1 text-xs font-medium">Founder</span>
+    </div>
+    <div class="mt-5 max-w-xl rounded-2xl bg-navy-card p-4 flex items-center gap-3">
+      <div class="size-11 rounded-full bg-gold text-gold-ink flex items-center justify-center font-medium shrink-0" aria-hidden="true">S</div>
+      <div class="flex-1 min-w-0">
+        <p class="font-medium text-sm">Shaurya, founder</p>
+        <p class="text-xs text-sky">Questions, ideas, or want to write a story?</p>
+        <p class="text-xs text-gold break-all">{email}</p>
+      </div>
+      <a href={`mailto:${email}`} class="rounded-full bg-gold text-gold-ink px-4 py-2 text-xs font-medium shrink-0">Email me</a>
+    </div>
+  </section>
+
+  <section class="mt-10">
+    <h2 class="text-2xl font-medium">Safety</h2>
+    <div class="mt-3 max-w-xl space-y-3 text-sky leading-relaxed">
+      <p>CricInspire helps US teens discover cricket, learn the game, and find a team.</p>
+      <p>Every teen submission is reviewed by an adult before publishing. A parent or guardian must consent before a teen name or photo appears.</p>
+      <p>We do not collect personal data from children under 13 and we do not run ads or trackers aimed at minors.</p>
+    </div>
+  </section>
 </BaseLayout>
